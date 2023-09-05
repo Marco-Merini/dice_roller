@@ -7,61 +7,46 @@ void main() {
     home: Scaffold(
       backgroundColor: Colors.red,
       appBar: AppBar(
-        title: const Text('Dados'),
+        title: const Text('Bola Mágica - Marco Leone Merini'),
         backgroundColor: Colors.red,
       ),
-      body: const DicePage(),
+      body: BallPage(),
     ),
   ));
 }
 
-class DicePage extends StatefulWidget {
-  const DicePage({super.key});
-
+class BallPage extends StatefulWidget {
   @override
-  State<DicePage> createState() => _DicePageState();
+  State<BallPage> createState() => _BallPageState();
 }
 
-class _DicePageState extends State<DicePage> {
-  var leftDiceNumber = 1;
-  var rightDiceNumber = 1;
+class _BallPageState extends State<BallPage> {
+  int answer = 1;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Row(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: TextButton(
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.all(16),
-              ),
-              onPressed: () {
-                rollDie();
-              },
-              child: Image.asset('images/dice$leftDiceNumber.png'),
+          TextButton(
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.all(16),
             ),
-          ),
-          Expanded(
-            child: TextButton(
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.all(16),
-                ),
-                onPressed: () {
-                  rollDie();
-                },
-                child: Image.asset('images/dice$rightDiceNumber.png')),
+            onPressed: () {
+              shakeBall();
+            },
+            child: Image.asset('images/ball$answer.png'),
           ),
         ],
       ),
     );
   }
 
-  void rollDie() {
+  void shakeBall() {
     setState(() {
       var random = Random();
-      leftDiceNumber = random.nextInt(6) + 1;
-      rightDiceNumber = random.nextInt(6) + 1;
+      answer = random.nextInt(5) + 1;
     });
   }
 }
